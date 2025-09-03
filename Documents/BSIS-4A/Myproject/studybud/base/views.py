@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Room
+from .form import RoomForm
 # Create your views here.
 '''rooms=[{'id': 1, 'name': 'Room A'}, 
        {'id': 2, 'name': 'Room B'}, 
@@ -16,5 +17,17 @@ def room(request, pk):
             
     context = {'room': room}
     return render(request, 'base/room.html', context)
+
+def createRoom(request):
+    form= RoomForm()
+    context={'form': form}
+    if request.method=='POST':
+        form= RoomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'base/room_form.html', context)
+
+
 
 
