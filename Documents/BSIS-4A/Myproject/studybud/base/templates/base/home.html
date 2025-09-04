@@ -13,14 +13,18 @@
 
         <div>
             <h3>Topics</h3>
+            <div>
+                 <a href="{% url 'home' %}">All</a>
+            </div>
             {% for topic in topics %}
            <div>
-              <a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
+               <a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}</a>
            </div>
             {% endfor %}
 
         </div>
         <div>
+             <h5>{{room_count}} Rooms available</h5>
              <a href ={% url 'create-room' %}>Create a New Room</a>
              <div>
                {% for room in rooms%}
