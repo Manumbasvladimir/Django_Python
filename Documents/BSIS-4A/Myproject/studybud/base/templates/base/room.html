@@ -3,4 +3,24 @@
 {% block content %}
     <h1>Room Details</h1>
     <p>{{ room.name }}</p>
+    <p>{{ room.description }}</p>
+ <div class ="comment-wrapper">
+    <h2>Conversation</h2>
+     {% for message in room_messages %}
+        <div>
+           <small>@{{ message.user.username }} - {{ message.created|timesince }} days ago</small>
+              <p>{{ message.body }}</p>
+        </div>
+     {% endfor %}
+</div>
+{% if user.is_authenticated %}
+<div class="post-comment">
+    <h2>Post a Comment</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="body" rows="3" placeholder="Write your comment here..."></textarea>
+        <button type="submit">Post</button>
+    </form>
+</div>
+{% endif %}
 {% endblock %}
