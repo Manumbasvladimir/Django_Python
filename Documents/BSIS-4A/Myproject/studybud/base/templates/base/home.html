@@ -1,17 +1,30 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <h1>Welcome to StudyBud</h1>
-    <div>
+<style>
+    .home-container {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+    
+    <div class="home-container">
+
         <div>
-         {% for room in rooms%}
-            <div>
-                 
-                <span>By {{room.host.username}}</span>
-                <span>{{room.topic.name}}</span>
-              <h4>{{room.id}}--<a href="{% url 'room' room.id %}">{{room.name}}</a></h4>
-            </div>
-         {% endfor %}
+        {% include 'base/topics_components.html' %}
+
         </div>
-    </div>
+        <div>
+             <h5>{{room_count}} Rooms available</h5>
+             <a href ={% url 'create-room' %}>Create a New Room</a>
+             
+             {% include 'base/feed_components.html' %}          
+         </div>
+           <div >
+             {% include 'base/activity_component.html' %}
+           </div>
+        </div>
+   </div>
+    
 {% endblock %}

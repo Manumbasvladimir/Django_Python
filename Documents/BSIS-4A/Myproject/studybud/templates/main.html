@@ -1,16 +1,22 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studybud</title>
+    <title>Study Bud</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style/main.css' %}">
 </head>
 <body>
     {% include 'navbar.html' %}
-    
-   
+    {% if messages %}
+        {% for message in messages %}
+            <div>
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     {% block content %}
-  
-    {% endblock %}
+    {% endblock content %}
 </body>
 </html>
